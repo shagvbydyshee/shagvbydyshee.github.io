@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ШАГ В БУДУЩЕЕ - Единый портал карьерного развития</title>
+    <style>
+        /* Основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка - ВОЗВРАЩЕНО К ПРЕЖНЕМУ СТИЛЮ */
+        header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* КНОПКИ - ВОЗВРАЩЕНО К ПРЕЖНЕМУ СТИЛЮ */
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #3b82f6;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .btn-primary:hover {
+            background: #0da271;
+        }
+
+        .btn-secondary:hover {
+            background: #f8fafc;
+            border-color: #f8fafc;
+        }
+
+        /* Герой-секция */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #4b5563;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        /* Блоки возможностей */
+        .features {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #1e40af;
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: #3b82f6;
+            font-size: 24px;
+        }
+
+        .feature-card h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        /* Как это работает */
+        .how-it-works {
+            padding: 80px 0;
+            background: #f1f5f9;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin-top: 50px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        /* Вакансии */
+        .vacancies {
+            padding: 80px 0;
+        }
+
+        .vacancy-list {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .vacancy-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .vacancy-info h4 {
+            color: #1e40af;
+            margin-bottom: 5px;
+        }
+
+        /* Кому подходит */
+        .audience {
+            padding: 80px 0;
+            background: #f1f5f9;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .audience-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        /* Преимущества для бизнеса */
+        .business-benefits {
+            padding: 80px 0;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .benefit {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #10b981;
+        }
+
+        /* Футер */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links h4 {
+            color: #60a5fa;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #60a5fa;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #94a3b8;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 18px;
+            }
+            
+            nav ul {
+                gap: 5px;
+            }
+            
+            nav a {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            
+            .btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .steps {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .auth-buttons {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .logo {
+                gap: 8px;
+            }
+            
+            .logo-text {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">ШБ</div>
+                <div class="logo-text">ШАГ В БУДУЩЕЕ</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#features">Возможности</a></li>
+                    <li><a href="#how-it-works">Как это работает</a></li>
+                    <li><a href="vacancies.html">Вакансии</a></li>
+                    <li><a href="#business">Для бизнеса</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-secondary">Войти</button>
+                <button class="btn btn-primary">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <h1>Начни свой путь к успешной карьере</h1>
+            <p class="hero-subtitle">
+                Первый в России портал, который объединяет профориентацию, стажировки 
+                и подработку для молодежи от 14 лет. Безопасно. Легально. Эффективно.
+            </p>
+            
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Найти стажировку или подработку по вашим интересам...">
+                <button class="btn btn-primary" style="width: 100%;">Найти вакансии</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Возможности -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Что дает портал</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Профориентация</h3>
+                    <p>Тестирование и рекомендации по выбору профессии на основе ваших способностей и интересов</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💼</div>
+                    <h3>Легальная подработка</h3>
+                    <p>Официальное трудоустройство от 14 лет с заключением договора и гарантией оплаты</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Стажировки</h3>
+                    <p>База стажировок от проверенных компаний с возможностью получить реальный опыт</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Цифровое портфолио</h3>
+                    <p>Создайте свое цифровое резюме с подтвержденным опытом работы и отзывами</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Как это работает -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Как это работает</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Создайте профиль</h3>
+                    <p>Зарегистрируйтесь и пройдите профориентационное тестирование</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Найдите возможности</h3>
+                    <p>Выберите подработку или стажировку из проверенных вакансий</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Оформите договор</h3>
+                    <p>Заключите электронный договор с работодателем через платформу</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Начните работать</h3>
+                    <p>Получайте опыт и заработок с юридической защитой</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Популярные вакансии -->
+    <section id="vacancies" class="vacancies">
+        <div class="container">
+            <h2 class="section-title">Популярные вакансии</h2>
+            <div class="vacancy-list">
+                <div class="vacancy-card">
+                    <div class="vacancy-info">
+                        <h4>Помощник маркетолога (стажировка)</h4>
+                        <p>IT-компания • Москва • От 25 000 ₽/мес</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='vacancies.html'">Откликнуться</button>
+                </div>
+                
+                <div class="vacancy-card">
+                    <div class="vacancy-info">
+                        <h4>Стажер-разработчик</h4>
+                        <p>Разработка ПО • Удаленно • От 30 000 ₽/мес</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='vacancies.html'">Откликнуться</button>
+                </div>
+                
+                <div class="vacancy-card">
+                    <div class="vacancy-info">
+                        <h4>Ассистент менеджера проектов</h4>
+                        <p>Консалтинг • Санкт-Петербург • От 20 000 ₽/мес</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='vacancies.html'">Откликнуться</button>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn btn-primary" onclick="window.location.href='vacancies.html'" style="padding: 12px 40px; font-size: 16px;">
+                    Посмотреть все вакансии
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кому подходит -->
+    <section class="audience">
+        <div class="container">
+            <h2 class="section-title">Кому подходит наш портал</h2>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3>Школьникам от 14 лет</h3>
+                    <p>Первая подработка с официальным оформлением</p>
+                </div>
+                
+                <div class="audience-card">
+                    <h3>Студентам</h3>
+                    <p>Стажировки по специальности и подработка в свободное время</p>
+                </div>
+                
+                <div class="audience-card">
+                    <h3>Молодым специалистам</h3>
+                    <p>Карьерный старт и наработка опыта</p>
+                </div>
+                
+                <div class="audience-card">
+                    <h3>Предпринимателям</h3>
+                    <p>Найм мотивированных молодых сотрудников</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества для бизнеса -->
+    <section id="business" class="business-benefits">
+        <div class="container">
+            <h2 class="section-title">Преимущества для бизнеса</h2>
+            <div class="benefits">
+                <div class="benefit">
+                    <h4>Доступ к молодой аудитории</h4>
+                    <p>Находите талантливых сотрудников среди молодежи</p>
+                </div>
+                
+                <div class="benefit">
+                    <h4>Гибкий найм</h4>
+                    <p>Привлекайте сотрудников на проекты и сезонную работу</p>
+                </div>
+                
+                <div class="benefit">
+                    <h4>Юридическая защита</h4>
+                    <p>Все договоры оформляются через платформу</p>
+                </div>
+                
+                <div class="benefit">
+                    <h4>Экономия на подборе</h4>
+                    <p>Снижайте затраты на рекрутинг</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <h4>Портал</h4>
+                    <ul>
+                        <li><a href="#">О проекте</a></li>
+                        <li><a href="#how-it-works">Как это работает</a></li>
+                        <li><a href="#">Безопасность</a></li>
+                        <li><a href="#">Партнерам</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Пользователям</h4>
+                    <ul>
+                        <li><a href="vacancies.html">Все вакансии</a></li>
+                        <li><a href="#">Стажировки</a></li>
+                        <li><a href="#">Профориентация</a></li>
+                        <li><a href="#">Помощь</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Работодателям</h4>
+                    <ul>
+                        <li><a href="#">Разместить вакансию</a></li>
+                        <li><a href="#">Найти стажера</a></li>
+                        <li><a href="#">Тарифы</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>Email: info@step-future.ru</li>
+                        <li>Телефон: 8-800-xxx-xx-xx</li>
+                        <li>Москва, ул. Примерная, д. 1</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2026 Портал "ШАГ В БУДУЩЕЕ". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Простая анимация при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-card, .audience-card, .benefit');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            cards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+            
+            // Плавная прокрутка для внутренних ссылок
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    // Если это якорная ссылка (#), делаем плавную прокрутку
+                    if(href.startsWith('#') && href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if(target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    // Если это ссылка на vacancies.html, переход произойдет автоматически
+                });
+            });
+            
+            // Обработка кнопки поиска
+            document.querySelector('.search-box .btn-primary').addEventListener('click', function() {
+                window.location.href = 'vacancies.html';
+            });
+            
+            // Обработка поискового ввода (при нажатии Enter)
+            document.querySelector('.search-input').addEventListener('keypress', function(e) {
+                if(e.key === 'Enter') {
+                    window.location.href = 'vacancies.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ШАГ В БУДУЩЕЕ - Все вакансии</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка - ВОЗВРАЩЕНО К ПРЕЖНЕМУ СТИЛЮ */
+        header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3b82f6;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        nav a:hover, nav a.active {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* КНОПКИ - ВОЗВРАЩЕНО К ПРЕЖНЕМУ СТИЛЮ */
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #3b82f6;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Страница вакансий */
+        .vacancies-page {
+            padding: 60px 0 80px;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 18px;
+        }
+
+        /* Фильтры */
+        .filters {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4b5563;
+            font-weight: 500;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+
+        /* Список вакансий */
+        .vacancies-list {
+            display: grid;
+            gap: 20px;
+        }
+
+        .vacancy-card-large {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .vacancy-card-large:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .vacancy-header {
+            padding: 25px;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .vacancy-title {
+            font-size: 22px;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .vacancy-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .vacancy-body {
+            padding: 25px;
+        }
+
+        .vacancy-description {
+            color: #4b5563;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .vacancy-requirements {
+            margin-bottom: 20px;
+        }
+
+        .requirements-title {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .requirements-list li {
+            padding: 5px 0;
+            color: #6b7280;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .requirements-list li:before {
+            content: "•";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .vacancy-footer {
+            padding: 20px 25px;
+            background: #f9fafb;
+            border-top: 1px solid #f3f4f6;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .salary {
+            font-size: 20px;
+            font-weight: 700;
+            color: #10b981;
+        }
+
+        /* Пагинация */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+        }
+
+        .pagination-btn {
+            padding: 10px 20px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .pagination-btn:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+        }
+
+        .pagination-btn.active {
+            background: #3b82f6;
+            color: white;
+            border-color: #3b82f6;
+        }
+
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Футер */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-links h4 {
+            color: #60a5fa;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #60a5fa;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #94a3b8;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+            
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .vacancy-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .vacancy-footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">ШБ</div>
+                <div class="logo-text">ШАГ В БУДУЩЕЕ</div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="index.html#features">Возможности</a></li>
+                    <li><a href="vacancies.html" class="active">Вакансии</a></li>
+                    <li><a href="index.html#business">Для бизнеса</a></li>
+                    <li><a href="index.html#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-secondary">Войти</button>
+                <button class="btn btn-primary">Регистрация</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Страница вакансий -->
+    <section class="vacancies-page">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">Все вакансии и стажировки</h1>
+                <p class="page-subtitle">Найдите подходящую работу или стажировку для начала карьеры</p>
+            </div>
+
+            <!-- Фильтры -->
+            <div class="filters">
+                <div class="filters-grid">
+                    <div class="filter-group">
+                        <label for="category">Категория</label>
+                        <select id="category" class="filter-select">
+                            <option value="">Все категории</option>
+                            <option value="it">IT и разработка</option>
+                            <option value="marketing">Маркетинг и PR</option>
+                            <option value="design">Дизайн</option>
+                            <option value="management">Управление проектами</option>
+                            <option value="sales">Продажи</option>
+                            <option value="finance">Финансы</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="type">Тип занятости</label>
+                        <select id="type" class="filter-select">
+                            <option value="">Любой тип</option>
+                            <option value="internship">Стажировка</option>
+                            <option value="part-time">Подработка</option>
+                            <option value="project">Проектная работа</option>
+                            <option value="remote">Удаленная работа</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="city">Город</label>
+                        <select id="city" class="filter-select">
+                            <option value="">Все города</option>
+                            <option value="moscow">Москва</option>
+                            <option value="spb">Санкт-Петербург</option>
+                            <option value="remote">Удаленно</option>
+                            <option value="kazan">Казань</option>
+                            <option value="ekb">Екатеринбург</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="experience">Опыт</label>
+                        <select id="experience" class="filter-select">
+                            <option value="">Любой опыт</option>
+                            <option value="none">Без опыта</option>
+                            <option value="student">Для студентов</option>
+                            <option value="junior">Начинающий</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Список вакансий -->
+            <div class="vacancies-list">
+                <!-- Вакансия 1 -->
+                <div class="vacancy-card-large">
+                    <div class="vacancy-header">
+                        <h2 class="vacancy-title">Стажер-разработчик Python/Django</h2>
+                        <div class="vacancy-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span>IT компания "ТехноСофт"</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Москва / Удаленно</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Стажировка</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Гибкий график</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-body">
+                        <p class="vacancy-description">
+                            Ищем начинающего разработчика для участия в создании веб-приложений на Django. 
+                            Под руководством опытного наставника вы будете работать над реальными проектами, 
+                            изучать лучшие практики разработки и получать ценный опыт.
+                        </p>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Что предстоит делать:</h4>
+                            <ul class="requirements-list">
+                                <li>Разработка backend-части веб-приложений</li>
+                                <li>Участие в проектировании архитектуры</li>
+                                <li>Написание unit-тестов</li>
+                                <li>Участие в code review</li>
+                                <li>Работа с Git и CI/CD</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Требования:</h4>
+                            <ul class="requirements-list">
+                                <li>Базовые знания Python</li>
+                                <li>Понимание ООП</li>
+                                <li>Желание развиваться в веб-разработке</li>
+                                <li>Ответственность и обучаемость</li>
+                                <li>Учащийся 3-4 курса технического вуза</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-footer">
+                        <div class="salary">от 35 000 ₽/мес</div>
+                        <button class="btn btn-primary">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+
+                <!-- Вакансия 2 -->
+                <div class="vacancy-card-large">
+                    <div class="vacancy-header">
+                        <h2 class="vacancy-title">Помощник маркетолога (стажировка)</h2>
+                        <div class="vacancy-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span>Digital агентство "Пиксель"</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Санкт-Петербург</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Стажировка с возможностью трудоустройства</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>20-30 часов в неделю</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-body">
+                        <p class="vacancy-description">
+                            Приглашаем активного и целеустремленного стажера в отдел маркетинга. 
+                            Идеальная возможность для студентов получить практический опыт в digital-маркетинге 
+                            и SMM. Работа в дружной команде с наставничеством.
+                        </p>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Обязанности:</h4>
+                            <ul class="requirements-list">
+                                <li>Подготовка контента для социальных сетей</li>
+                                <li>Анализ конкурентов и рынка</li>
+                                <li>Поддержка email-рассылок</li>
+                                <li>Помощь в организации мероприятий</li>
+                                <li>Составление отчетов по аналитике</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Мы ждем:</h4>
+                            <ul class="requirements-list">
+                                <li>Студент 2-4 курса по маркетингу, рекламе или смежным направлениям</li>
+                                <li>Грамотная письменная и устная речь</li>
+                                <li>Знание основных социальных сетей</li>
+                                <li>Креативность и внимательность к деталям</li>
+                                <li>Готовность учиться и развиваться</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-footer">
+                        <div class="salary">от 25 000 ₽/мес</div>
+                        <button class="btn btn-primary">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+
+                <!-- Вакансия 3 -->
+                <div class="vacancy-card-large">
+                    <div class="vacancy-header">
+                        <h2 class="vacancy-title">Ассистент менеджера проектов</h2>
+                        <div class="vacancy-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span>Консалтинговая группа "Стратегия"</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Удаленно</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Подработка / Проектная работа</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Гибкий график, 15-20 часов в неделю</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-body">
+                        <p class="vacancy-description">
+                            Требуется помощник для поддержки проектной деятельности. 
+                            Отличная возможность для студентов и начинающих специалистов 
+                            получить опыт в управлении проектами в международной компании.
+                        </p>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Вам предстоит:</h4>
+                            <ul class="requirements-list">
+                                <li>Поддержка документации проектов</li>
+                                <li>Организация онлайн-встреч и вебинаров</li>
+                                <li>Подготовка презентаций и отчетов</li>
+                                <li>Координация коммуникации между командами</li>
+                                <li>Мониторинг сроков выполнения задач</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Наши ожидания:</h4>
+                            <ul class="requirements-list">
+                                <li>Уровень английского B1 и выше</li>
+                                <li>Уверенный пользователь MS Office / Google Workspace</li>
+                                <li>Организованность и мультизадачность</li>
+                                <li>Умение работать в команде</li>
+                                <li>Обучаемость и ответственность</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-footer">
+                        <div class="salary">от 30 000 ₽/мес</div>
+                        <button class="btn btn-primary">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+
+                <!-- Вакансия 4 -->
+                <div class="vacancy-card-large">
+                    <div class="vacancy-header">
+                        <h2 class="vacancy-title">UI/UX дизайнер (стажер)</h2>
+                        <div class="vacancy-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span>Студия дизайна "Интерфейс"</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Москва, м. Курская</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Стажировка</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Полный день / Неполный день</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-body">
+                        <p class="vacancy-description">
+                            Ищем талантливого стажера в команду UI/UX дизайна. 
+                            Под руководством опытных дизайнеров вы будете участвовать 
+                            в создании интерфейсов для мобильных приложений и веб-платформ.
+                        </p>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Задачи:</h4>
+                            <ul class="requirements-list">
+                                <li>Создание wireframes и прототипов</li>
+                                <li>Подготовка дизайн-макетов в Figma</li>
+                                <li>Участие в исследованиях пользователей</li>
+                                <li>Подготовка дизайн-систем компонентов</li>
+                                <li>Тестирование интерфейсов</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Требуется:</h4>
+                            <ul class="requirements-list">
+                                <li>Базовое владение Figma</li>
+                                <li>Понимание принципов UI/UX</li>
+                                <li>Портфолио с учебными работами</li>
+                                <li>Чувство стиля и внимательность к деталям</li>
+                                <li>Студент профильного вуза/курсов</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-footer">
+                        <div class="salary">от 28 000 ₽/мес</div>
+                        <button class="btn btn-primary">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+
+                <!-- Вакансия 5 -->
+                <div class="vacancy-card-large">
+                    <div class="vacancy-header">
+                        <h2 class="vacancy-title">Контент-менеджер (удаленно)</h2>
+                        <div class="vacancy-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-building"></i>
+                                <span>Образовательная платформа "Знание"</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Удаленно</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                <span>Подработка</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Свободный график</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-body">
+                        <p class="vacancy-description">
+                            Ищем ответственного контент-менеджера для ведения 
+                            образовательного блога и социальных сетей. Подойдет 
+                            студентам гуманитарных специальностей или начинающим 
+                            специалистам.
+                        </p>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Обязанности:</h4>
+                            <ul class="requirements-list">
+                                <li>Написание статей для блога</li>
+                                <li>Ведение социальных сетей (VK, Telegram)</li>
+                                <li>Подбор и обработка иллюстраций</li>
+                                <li>Составление контент-плана</li>
+                                <li>Анализ эффективности публикаций</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vacancy-requirements">
+                            <h4 class="requirements-title">Что важно:</h4>
+                            <ul class="requirements-list">
+                                <li>Грамотная письменная речь</li>
+                                <li>Умение писать интересные тексты</li>
+                                <li>Базовые знания SEO</li>
+                                <li>Опыт работы с соцсетями</li>
+                                <li>Самоорганизация при удаленной работе</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="vacancy-footer">
+                        <div class="salary">от 500 ₽ за статью</div>
+                        <button class="btn btn-primary">Откликнуться на вакансию</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пагинация -->
+            <div class="pagination">
+                <button class="pagination-btn disabled">
+                    <i class="fas fa-chevron-left"></i> Назад
+                </button>
+                
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <span>...</span>
+                <button class="pagination-btn">10</button>
+                
+                <button class="pagination-btn">
+                    Вперед <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer id="contacts">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <h4>Портал</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="#">О проекте</a></li>
+                        <li><a href="index.html#how-it-works">Как это работает</a></li>
+                        <li><a href="#">Безопасность</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Пользователям</h4>
+                    <ul>
+                        <li><a href="vacancies.html">Все вакансии</a></li>
+                        <li><a href="#">Стажировки</a></li>
+                        <li><a href="#">Профориентация</a></li>
+                        <li><a href="#">Помощь</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Работодателям</h4>
+                    <ul>
+                        <li><a href="#">Разместить вакансию</a></li>
+                        <li><a href="#">Найти стажера</a></li>
+                        <li><a href="#">Тарифы</a></li>
+                        <li><a href="#">Поддержка</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>Email: info@step-future.ru</li>
+                        <li>Телефон: 8-800-xxx-xx-xx</li>
+                        <li>Москва, ул. Примерная, д. 1</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                © 2026 Портал "ШАГ В БУДУЩЕЕ". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Добавляем Font Awesome для иконок
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        document.head.appendChild(link);
+
+        // Фильтрация вакансий
+        document.addEventListener('DOMContentLoaded', function() {
+            const filters = document.querySelectorAll('.filter-select');
+            
+            filters.forEach(filter => {
+                filter.addEventListener('change', function() {
+                    applyFilters();
+                });
+            });
+            
+            function applyFilters() {
+                const category = document.getElementById('category').value;
+                const type = document.getElementById('type').value;
+                const city = document.getElementById('city').value;
+                const experience = document.getElementById('experience').value;
+                
+                console.log('Фильтры:', { category, type, city, experience });
+                
+                // В реальном проекте здесь был бы запрос к серверу или фильтрация на клиенте
+                alert('Фильтры применены! В реальном проекте здесь будет обновление списка вакансий.');
+            }
+            
+            // Обработка кликов по кнопкам отклика
+            const applyButtons = document.querySelectorAll('.btn-primary');
+            applyButtons.forEach(button => {
+                if (!button.onclick) { // Проверяем, нет ли уже обработчика
+                    button.addEventListener('click', function() {
+                        const vacancyTitle = this.closest('.vacancy-card-large')
+                            .querySelector('.vacancy-title').textContent;
+                        
+                        alert(`Вы откликнулись на вакансию: "${vacancyTitle}"\n\nВ реальном проекте здесь будет форма отклика.`);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
